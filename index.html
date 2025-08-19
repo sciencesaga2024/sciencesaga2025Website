@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Science Saga 2025 - Annual science competition hosted by Department of Physics, Marian College Kuttikkanam. Quiz and PowerPoint presentation competitions for students.">
+    <meta name="keywords" content="Science Saga 2025, Marian College, Physics Competition, Student Quiz, Science Event">
+    <meta property="og:title" content="Science Saga 2025 | Marian College Kuttikkanam">
+    <meta property="og:description" content="Join us for an exciting science competition featuring quiz and presentation events. Register now!">
+    <title>Science Saga 2025 | Department of Physics - Marian College Kuttikkanam</title>
+    
+    <style>
+        :root {
+            --primary-red: #9d0606;
+            --primary-blue: #0c2d55;
+            --red-gradient: linear-gradient(135deg, #9d0606 0%, #d62828 100%);
+            --blue-gradient: linear-gradient(135deg, #0c2d55 0%, #1e5f8e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #333;
+            --text-secondary: #666;
+            --bg-light: #f8f9fa;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background: #fff;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--red-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: var(--red-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--primary-red);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger::before {
+            top: -8px;
+        }
+
+        .hamburger::after {
+            bottom: -8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            33% {
+                transform: translateY(-100px) translateX(100px);
+            }
+            66% {
+                transform: translateY(100px) translateX(-100px);
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .college-logo {
+            width: 550px;
+            height: 231px;
+            margin: 0 auto 2rem;
+            background: rgb(255 255 255 / 50%);
+            border-radius: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-red);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--red-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .event-date {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--blue-gradient);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 1s ease 0.4s both;
+            margin-bottom: 2rem;
+        }
+
+        .venue-info {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            margin: 1rem auto;
+            display: inline-block;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--red-gradient);
+            color: white;
+            box-shadow: 0 5px 20px rgba(157, 6, 6, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .countdown-title {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .countdown-boxes {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .countdown-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            min-width: 80px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--primary-blue);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--red-gradient);
+            border-radius: 2px;
+        }
+
+        /* Event Overview */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .overview-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--red-gradient);
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .overview-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--blue-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .overview-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .overview-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .overview-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .overview-card ul li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .overview-card ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        .prize-info {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .prize-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+        }
+
+        .prize-label {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .prize-amount {
+            font-weight: 700;
+            color: var(--primary-red);
+            font-size: 1.2rem;
+        }
+
+        /* Registration Section */
+        .registration-section {
+            background: var(--bg-light);
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .registration-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .registration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .registration-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .registration-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(157, 6, 6, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .registration-card:hover::before {
+            opacity: 1;
+        }
+
+        .registration-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .registration-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: var(--red-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(157, 6, 6, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(157, 6, 6, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(157, 6, 6, 0);
+            }
+        }
+
+        .registration-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .registration-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--blue-gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        .register-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(12, 45, 85, 0.3);
+        }
+
+        /* Instructions Section */
+        .instructions {
+            padding: 5rem 2rem;
+        }
+
+        .instructions-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .instruction-accordion {
+            margin-top: 2rem;
+        }
+
+        .accordion-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header {
+            padding: 1.5rem 2rem;
+            background: var(--bg-light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: #e8e9ea;
+        }
+
+        .accordion-header h3 {
+            margin: 0;
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 1000px;
+        }
+
+        .accordion-body {
+            padding: 2rem;
+        }
+
+        .instruction-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instruction-list li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .instruction-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-red);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-blue);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: calc(50% - 30px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+            text-align: left;
+            padding-left: 30px;
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            top: 0;
+            box-shadow: 0 0 0 5px rgba(157, 6, 6, 0.2);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            left: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-date {
+            color: var(--primary-red);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .contact-item {
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--red-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-text {
+            color: var(--text-secondary);
+            text-align: left;
+        }
+
+        .contact-text a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .footer-text {
+            margin: 1rem 0;
+            opacity: 0.9;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .mobile-menu-toggle.active .hamburger {
+                background: transparent;
+            }
+
+            .mobile-menu-toggle.active .hamburger::before {
+                transform: rotate(45deg);
+                top: 0;
+            }
+
+            .mobile-menu-toggle.active .hamburger::after {
+                transform: rotate(-45deg);
+                bottom: 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 2rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 50px);
+                margin-left: 50px !important;
+                text-align: left !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-dot {
+                left: -40px !important;
+                right: auto !important;
+            }
+
+            .registration-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown-boxes {
+                gap: 0.5rem;
+            }
+
+            .countdown-box {
+                min-width: 70px;
+                padding: 1rem;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Skip to main content */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0 0 5px 0;
+            transition: top 0.3s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus styles */
+        *:focus {
+            outline: 3px solid var(--primary-red);
+            outline-offset: 2px;
+        }
+
+        /* Animation utilities */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Success/Error Messages */
+        .message {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+        }
+
+        .message.success {
+            background: #28a745;
+        }
+
+        .message.error {
+            background: #dc3545;
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 0.5rem;
+            animation: blink 2s infinite;
+        }
+
+        .status-indicator.active {
+            background: #28a745;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">MC</div>
+                <span class="logo-text">Science Saga 2025</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#overview" class="nav-link">Overview</a></li>
+                <li><a href="#registration" class="nav-link">Registration</a></li>
+                <li><a href="#instructions" class="nav-link">Instructions</a></li>
+                <li><a href="#timeline" class="nav-link">Timeline</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="particles" id="particles"></div>
+            <div class="hero-content">
+                <div class="college-logo">
+			<img src="https://mariancollege.org/wp-content/uploads/2023/03/marian-college-02.png">
+                </div>
+                <h1>Science Saga 2025</h1>
+                <p class="hero-subtitle">Department of Physics, Marian College Kuttikkanam</p>
+                <div class="event-date">September 10-12, 2025</div>
+                <div class="venue-info">
+                    <strong>Venue:</strong> LOGOS & SOPHOS Training Center, Marian College
+                </div>
+                <div class="cta-buttons">
+                    <a href="#registration" class="btn btn-primary">Register Now</a>
+                    <a href="#overview" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="countdown">
+                    <h3 class="countdown-title">Event Countdown</h3>
+                    <div class="countdown-boxes" id="countdown">
+                        <div class="countdown-box">
+                            <span class="countdown-number" id="days">00</span>
+                            <span class="countdown-label">Days</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="countdown-number" id="hours">00</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="countdown-number" id="minutes">00</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="countdown-number" id="seconds">00</span>
+                            <span class="countdown-label">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Overview -->
+        <section id="overview">
+            <h2 class="section-title">Event Overview</h2>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="overview-icon">🧠</div>
+                    <h3>General Science Quiz Competition</h3>
+                    <p>Test your knowledge across various scientific disciplines in our exciting quiz competition. Open to all higher secondary students with challenging questions covering physics, chemistry, biology, and general science.</p>
+                    <div class="prize-info">
+                        <div class="prize-item">
+                            <span class="prize-label">1st Prize:</span>
+                            <span class="prize-amount">₹3,000</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-label">2nd Prize:</span>
+                            <span class="prize-amount">₹1,500</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-label">3rd Prize:</span>
+                            <span class="prize-amount">₹1,000</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-label">Registration Fee:</span>
+                            <span class="prize-amount">₹100 per team</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon">💡</div>
+                    <h3>PowerPoint Presentation Contest</h3>
+                    <p>Showcase your presentation skills and scientific knowledge on cutting-edge topics that shape our future. Maximum 2 members per team.</p>
+                    <div class="prize-info">
+                        <div class="prize-item">
+                            <span class="prize-label">1st Prize:</span>
+                            <span class="prize-amount">₹3,000</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-label">2nd Prize:</span>
+                            <span class="prize-amount">₹1,500</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-label">3rd Prize:</span>
+                            <span class="prize-amount">₹1,000</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-label">Registration Fee:</span>
+                            <span class="prize-amount">₹100 per team</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon">🎯</div>
+                    <h3>Presentation Topics</h3>
+                    <p><strong>Choose from these exciting topics:</strong></p>
+                    <ul>
+                        <li>AI in Gaming and Entertainment Industry</li>
+                        <li>Robotics in healthcare</li>
+                        <li>Indian Triumphs in Space Exploration</li>
+                        <li>Science in Kitchen</li>
+                        <li>Physics in Sports</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Section -->
+        <section class="registration-section" id="registration">
+            <div class="registration-container">
+                <h2 class="section-title">Registration</h2>
+                <p style="text-align: center; font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
+                    Exclusively for Higher Secondary Students • Lunch & Refreshments Included
+                </p>
+                <div class="registration-grid">
+                    <div class="registration-card">
+                        <div class="registration-icon">🧠</div>
+                        <h3>Science Quiz</h3>
+                        <p>Join our challenging general science quiz competition. Test your knowledge across multiple scientific disciplines.</p>
+                        <p><strong>Registration Fee: ₹100 per team</strong></p>
+                        <p><strong>Max 2 members per team</strong></p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeFcv9MqCXOYSnB6eKswaMkpsRkOXrTqekdgryNwohWy7zmbQ/viewform?usp=sharing&ouid=101227318892926396271" target="_blank" class="register-btn" onclick="showRegistrationMessage('quiz')">Register for Quiz</a>
+                    </div>
+                    <div class="registration-card">
+                        <div class="registration-icon">💡</div>
+                        <h3>PowerPoint Presentation</h3>
+                        <p>Present on cutting-edge scientific topics that are shaping our future. Showcase your research and presentation skills.</p>
+                        <p><strong>Registration Fee: ₹100 per team</strong></p>
+                        <p><strong>Max 2 members per team</strong></p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScSW8UDSX6YVae3g72rWBPOFSWtWmMG51kSnI6yQMCNuTcEoA/viewform?usp=sharing&ouid=101227318892926396271" target="_blank" class="register-btn" onclick="showRegistrationMessage('presentation')">Register for Presentation</a>
+                    </div>
+                    <div class="registration-card">
+                        <div class="registration-icon">🔬</div>
+                        <h3>Exhibition Registration</h3>
+                        <p>Witness the bleeding edge of science with our Exhibition showcasing innovative projects and discoveries.</p>
+                        <p><strong>Registration Fee: Free for all</strong></p>
+                        <p><strong>Open to all participants</strong></p>
+                        <a href="#" class="register-btn" onclick="showComingSoonMessage('exhibition')">Register for Exhibition</a>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <p style="font-size: 1.1rem; color: var(--primary-red); font-weight: 600;">
+                        Registration Closes: September 10, 2025 at 10:00 AM
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructions Section -->
+        <section class="instructions" id="instructions">
+            <div class="instructions-container">
+                <h2 class="section-title">Competition Instructions</h2>
+                <div class="instruction-accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(0)">
+                            <h3>General Science Quiz Rules</h3>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <ul class="instruction-list">
+                                    <li>Teams must consist of maximum 2 members from the same institution</li>
+                                    <li>All participants must be higher secondary students</li>
+                                    <li>Questions will cover Physics, Chemistry, Biology, and General Science</li>
+                                    <li>Both written and oral rounds will be conducted</li>
+                                    <li>Use of mobile phones or any electronic devices is strictly prohibited</li>
+                                    <li>Decision of the judges will be final and binding</li>
+                                    <li>Participants must bring their student ID cards</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(1)">
+                            <h3>PowerPoint Presentation Guidelines</h3>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <ul class="instruction-list">
+                                    <li>Choose any one topic from the given list</li>
+                                    <li>Presentation duration: 8-10 minutes + 2 minutes for Q&A</li>
+                                    <li>Maximum 15 slides (including title and reference slides)</li>
+                                    <li>Teams must bring their presentation in USB drive (backup recommended)</li>
+                                    <li>Original research and creative content will be given extra points</li>
+                                    <li>Plagiarism will lead to immediate disqualification</li>
+                                    <li>Judging criteria: Content quality, presentation skills, creativity, and time management</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(2)">
+                            <h3>Exhibition Guidelines</h3>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <ul class="instruction-list">
+                                    <li>Free entry for all participants and visitors</li>
+                                    <li>Exhibition will showcase cutting-edge scientific projects and innovations</li>
+                                    <li>Interactive demonstrations and hands-on experiences available</li>
+                                    <li>Educational sessions by faculty and students</li>
+                                    <li>Photography allowed for personal use only</li>
+                                    <li>Maintain social distancing and follow safety protocols</li>
+                                    <li>Refreshments will be provided to all attendees</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline" id="timeline">
+            <div class="timeline-container">
+                <h2 class="section-title">Event Timeline</h2>
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">September 10, 2025</div>
+                        <div class="timeline-title">Registration & Opening</div>
+                        <div class="timeline-description">
+                            9:30 AM - Spot registration opens<br>
+                            10:00 AM - Registration closes<br>
+                            10:30 AM - Opening ceremony
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">September 11, 2025</div>
+                        <div class="timeline-title">Exhibition</div>
+                        <div class="timeline-description">
+                            Science Exhibition by Department of Physics Marian College Kuttikkanam<br>
+                            Interactive demonstrations and educational sessions throughout the day
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">September 12, 2025</div>
+                        <div class="timeline-title">Finals & Closing</div>
+                        <div class="timeline-description">
+                            Morning - Quiz Preliminaries and Presentations<br>
+                            Afternoon - Results compilation<br>
+                            Evening - Prize distribution and closing ceremony
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <h2 class="section-title">Contact Information</h2>
+            <div class="contact-info">
+                <h3 style="color: var(--primary-blue); margin-bottom: 2rem;">Get in Touch</h3>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">👨‍🏫</div>
+                    <div class="contact-text">
+                        <strong>Staff Coordinator:</strong><br>
+                        Dr. Roshan Jose<br>
+                        <a href="tel:+918190007785">+91 8190007785</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">👥</div>
+                    <div class="contact-text">
+                        <strong>Student Coordinators:</strong><br>
+                        Sadasivan MJ: <a href="tel:+917306199603">+91 7306199603</a><br>
+                        Riyo Mathew: <a href="tel:+918592906517">+91 8592906517</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🏢</div>
+                    <div class="contact-text">
+                        <strong>Venue:</strong><br>
+                        LOGOS & SOPHOS Training Center<br>
+                        Marian College Kuttikkanam (Autonomous)<br>
+                        Idukki, Kerala
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div class="contact-text">
+                        <strong>Website:</strong><br>
+                        <a href="https://www.mariancollege.org" target="_blank">www.mariancollege.org</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">MC</div>
+            </div>
+            <p class="footer-text">Science Saga 2025 - Department of Physics</p>
+            <p class="footer-text">Marian College Kuttikkanam (Autonomous)</p>
+            <div class="footer-links">
+                <a href="https://www.mariancollege.org" target="_blank">College Website</a>
+                <a href="#contact">Contact</a>
+                <a href="#overview">About Event</a>
+            </div>
+            <p class="footer-text" style="font-size: 0.9rem; opacity: 0.7;">
+                © 2025 Marian College Kuttikkanam. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 1000);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling and active nav links
+        const navLinksArray = document.querySelectorAll('.nav-link');
+        navLinksArray.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu if open
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                
+                // Update active link
+                navLinksArray.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Update active nav link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                
+                if (scrollPos >= top && scrollPos < top + height) {
+                    navLinksArray.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Countdown timer
+        function updateCountdown() {
+            const eventDate = new Date('2025-09-10T09:30:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('countdown').innerHTML = '<p style="font-size: 1.5rem; color: var(--primary-red); font-weight: bold;">Event Started!</p>';
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Particles animation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Accordion functionality
+        function toggleAccordion(index) {
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            const clickedItem = accordionItems[index];
+            
+            // Close all other accordion items
+            accordionItems.forEach((item, i) => {
+                if (i !== index) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Toggle clicked item
+            clickedItem.classList.toggle('active');
+        }
+
+        // Timeline animation on scroll
+        function animateTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (itemTop < windowHeight * 0.8) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateTimeline);
+        animateTimeline(); // Run on load
+
+        // Fade in animation for sections
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.overview-card, .registration-card');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight * 0.8) {
+                    element.classList.add('fade-in', 'visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run on load
+
+        // Registration message
+        function showRegistrationMessage(type) {
+            const message = document.createElement('div');
+            message.className = 'message success show';
+            message.textContent = `You will be redirected to Google Forms for the ${type} registration.`;
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(message);
+                }, 300);
+            }, 3000);
+        }
+
+        // Coming soon message for exhibition
+        function showComingSoonMessage(type) {
+            const message = document.createElement('div');
+            message.className = 'message error show';
+            message.textContent = `${type} registration will be available soon. Please check back later!`;
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(message);
+                }, 300);
+            }, 3000);
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            // ESC key to close mobile menu
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Add smooth scrolling to all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Lazy load images and optimize performance
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+</body>
+</html>
