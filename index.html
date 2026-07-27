@@ -402,9 +402,16 @@
     font-size:0.75rem;
   }
   .panel-spacer{ flex:1; }
+  .panel-actions-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+  }
   .panel-meta{
     display:inline-flex;
-    align-self:center;
     align-items:center;
     gap:6px;
     font-family:'Special Elite', monospace;
@@ -416,8 +423,25 @@
     border:1px solid rgba(169,122,43,0.4);
     border-radius:999px;
     padding:5px 14px;
-    margin:0 auto 20px;
   }
+  .btn-ghost{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-family:'Special Elite', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--leather-dark);
+    background:transparent;
+    border:1px solid rgba(169,122,43,0.5);
+    border-radius:999px;
+    padding:5px 14px;
+    cursor:pointer;
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  .btn-ghost:hover{ background:rgba(169,122,43,0.16); transform:translateY(-1px); }
+  .btn-ghost svg{ width:11px; height:11px; }
   .btn{
     position:relative;
     display:inline-block;
@@ -462,6 +486,81 @@
   .btn:focus-visible{
     outline:2px solid var(--brass-light);
     outline-offset:3px;
+  }
+
+  /* ---------------------------------- GUIDELINES MODAL ---------------------------------- */
+  .modal-backdrop{
+    position:fixed; inset:0;
+    background:rgba(20,14,6,0.72);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    z-index:100;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.28s ease;
+  }
+  .modal-backdrop.is-open{ opacity:1; pointer-events:auto; }
+  .modal-card{
+    position:relative;
+    background:var(--paper);
+    width:100%;
+    max-width:560px;
+    max-height:82vh;
+    overflow-y:auto;
+    border-radius:6px;
+    border:1px solid rgba(42,29,18,0.22);
+    box-shadow:0 30px 60px rgba(0,0,0,0.5);
+    padding:38px 34px 32px;
+    transform:translateY(18px) scale(0.97);
+    transition:transform 0.28s ease;
+  }
+  .modal-backdrop.is-open .modal-card{ transform:translateY(0) scale(1); }
+  .modal-close{
+    position:absolute; top:14px; right:14px;
+    width:32px; height:32px;
+    border-radius:50%;
+    background:var(--leather-dark);
+    color:var(--brass-light);
+    border:none;
+    font-size:1.1rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 8px rgba(0,0,0,0.3);
+  }
+  .modal-close:hover{ background:var(--leather); }
+  .modal-card h3{
+    font-size:1.7rem;
+    font-style:italic;
+    margin-top:8px;
+    margin-bottom:22px;
+    padding-right:20px;
+  }
+  .modal-list{
+    list-style:none;
+    padding:0; margin:0;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .modal-list li{
+    padding-left:26px;
+    position:relative;
+    font-size:0.98rem;
+    line-height:1.55;
+    color:var(--ink);
+    border-bottom:1px dashed var(--rule);
+    padding-bottom:14px;
+  }
+  .modal-list li:last-child{ border-bottom:none; padding-bottom:0; }
+  .modal-list li::before{
+    content:'§';
+    position:absolute; left:0; top:0;
+    color:var(--brass);
+    font-weight:700;
+    font-size:1rem;
   }
 
   /* ---------------------------------- PRIZES ---------------------------------- */
@@ -618,7 +717,7 @@
       <p class="hero-sub">
         <span class="dept">Marian College Kuttikkanam</span><span class="divider">·</span>Autonomous
       </p>
-      <p class="hero-dates">06 AUGUST 2026 &nbsp;•&nbsp; 9:30 AM – 3:30 PM &nbsp;•&nbsp; LOGOS TRAINING HALL</p>
+      <p class="hero-dates">07 AUGUST 2026 &nbsp;•&nbsp; 9:30 AM – 3:30 PM &nbsp;•&nbsp; LOGOS & SOPHOS TRAINING HALL</p>
     </div>
 
     <div class="scroll-cue">
@@ -648,7 +747,7 @@
       <div class="detail-list reveal">
         <div class="detail-row">
           <span class="detail-label">Dates</span>
-          <span class="detail-value"><strong>06 August 2026</strong></span>
+          <span class="detail-value"><strong>07 August 2026</strong></span>
         </div>
         <div class="detail-row">
           <span class="detail-label">Timing</span>
@@ -656,7 +755,7 @@
         </div>
         <div class="detail-row">
           <span class="detail-label">Venue</span>
-          <span class="detail-value">LOGOS Training Hall, Marian College Kuttikkanam (Autonomous)</span>
+          <span class="detail-value">LOGOS & SOPHOS Training Hall, Marian College Kuttikkanam (Autonomous)</span>
         </div>
         <div class="detail-row">
           <span class="detail-label">Organized&nbsp;by</span>
@@ -688,9 +787,15 @@
         </div>
         <h3>General Science Quiz</h3>
         <p class="desc">Test your scientific knowledge across various domains — from the roots of theory to the branches of discovery.</p>
-        <span class="panel-meta">Teams of up to 2</span>
+        <div class="panel-actions-row">
+          <span class="panel-meta">Teams of up to 2</span>
+          <button type="button" class="btn-ghost" data-modal-target="quiz-guidelines-modal">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 2h7l3 3v9H3V2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6 7h4M6 9.5h4M6 12h2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Guidelines
+          </button>
+        </div>
         <div class="panel-spacer"></div>
-        <a href="#register-quiz" class="btn">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmhzCG2Z3Ew3hyXMxLRy3KtreSIBmzwrF4-Ca8HKtZuZgk9A/viewform?usp=pp_url&entry.1868468914=Quiz" class="btn">
           <span class="btn-art"></span>
           <span class="btn-scrim"></span>
           <span class="btn-label">Register for Quiz</span>
@@ -705,16 +810,22 @@
         </div>
         <h3>PPT Presentation Competition</h3>
         <p class="desc">Showcase your scientific knowledge through compelling presentations.</p>
-        <span class="panel-meta">Teams of up to 2</span>
         <div class="topics-title">Choose your topic</div>
         <ul class="topics-list">
-          <li>⁠AI in education- a boon or bane?</li>
-          <li>⁠Sustainable living through Science</li>
-          <li>⁠The future of space exploration</li>
-          <li>⁠The alarming sign of climate change - measures to reduce the impact</li>
+          <li>AI in education- a boon or bane?</li>
+          <li>Sustainable living through Science</li>
+          <li>The future of space exploration</li>
+          <li>The alarming sign of climate change - measures to reduce the impact</li>
         </ul>
+        <div class="panel-actions-row">
+          <span class="panel-meta">Teams of up to 2</span>
+          <button type="button" class="btn-ghost" data-modal-target="presentation-guidelines-modal">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 2h7l3 3v9H3V2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6 7h4M6 9.5h4M6 12h2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Guidelines
+          </button>
+        </div>
         <div class="panel-spacer"></div>
-        <a href="#register-presentation" class="btn">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmhzCG2Z3Ew3hyXMxLRy3KtreSIBmzwrF4-Ca8HKtZuZgk9A/viewform?usp=pp_url&entry.1868468914=Presentation" class="btn">
           <span class="btn-art"></span>
           <span class="btn-scrim"></span>
           <span class="btn-label">Register for Presentation</span>
@@ -765,7 +876,7 @@
   <section class="contact-section" id="contact">
     <div class="contact-card reveal">
       <h2>Contact Us</h2>
-      <p class="contact-line">Nicemon Thomas <a href="tel:+918190007785">+91 9400037037</a> <br> Sadasivan M J <a href="tel:+919745080901">+91 7306199603</a></p>
+      <p class="contact-line">Roshan Jose <a href="tel:+918190007785">+918190007785</a> <br> Nicemon Thomas <a href="tel:+919400037037">+91 9400037037</a> <br> Sadasivan M J <a href="tel:+917306199603">+91 7306199603</a></p>
       <p class="contact-line"><a href="https://www.mariancollege.org" target="_blank" rel="noopener">www.mariancollege.org</a></p>
     </div>
   </section>
@@ -773,6 +884,42 @@
   <footer>
     Science Saga 2026 &nbsp;·&nbsp; Department of Physics &nbsp;·&nbsp; Marian College Kuttikkanam (Autonomous)
   </footer>
+
+  <!-- ============================= GUIDELINES MODALS ============================= -->
+  <div class="modal-backdrop" id="quiz-guidelines-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="quiz-guidelines-title">
+      <button type="button" class="modal-close" data-modal-close aria-label="Close guidelines">&#10005;</button>
+      <div class="eyebrow">Entry No. 01</div>
+      <h3 id="quiz-guidelines-title">Quiz Competition Guidelines</h3>
+      <ul class="modal-list">
+        <li>Each team may have up to 2 members. There is no restriction on the number of teams per institution.</li>
+        <li>All participants must be higher secondary students.</li>
+        <li>Questions will cover Physics, Chemistry, Biology, and General Science.</li>
+        <li>Both written and oral rounds will be conducted.</li>
+        <li>Use of mobile phones or any electronic devices is strictly prohibited.</li>
+        <li>Decision of the judges will be final and binding.</li>
+        <li>Participants must bring their student ID cards.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="presentation-guidelines-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="presentation-guidelines-title">
+      <button type="button" class="modal-close" data-modal-close aria-label="Close guidelines">&#10005;</button>
+      <div class="eyebrow">Entry No. 02</div>
+      <h3 id="presentation-guidelines-title">PPT Presentation Guidelines</h3>
+      <ul class="modal-list">
+        <li>Each team may have up to 2 members. There is no restriction on the number of teams per institution.</li>
+        <li>Choose any one topic from the given list.</li>
+        <li>Presentation duration: 8–10 minutes + 2 minutes for Q&amp;A.</li>
+        <li>Maximum 15 slides (including title and reference slides).</li>
+        <li>Teams must bring their presentation in a USB drive (backup recommended).</li>
+        <li>Original research and creative content will be given extra points.</li>
+        <li>Plagiarism will lead to immediate disqualification.</li>
+        <li>Judging criteria: Content quality, presentation skills, creativity, and time management.</li>
+      </ul>
+    </div>
+  </div>
 
   <script>
     const io = new IntersectionObserver((entries)=>{
@@ -784,6 +931,32 @@
       });
     }, { threshold:0.15 });
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    function openModal(modal){
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+    function closeModal(modal){
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+    document.querySelectorAll('[data-modal-target]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const modal = document.getElementById(btn.dataset.modalTarget);
+        if(modal) openModal(modal);
+      });
+    });
+    document.querySelectorAll('.modal-backdrop').forEach(modal=>{
+      modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(modal); });
+      modal.querySelector('[data-modal-close]').addEventListener('click', ()=>closeModal(modal));
+    });
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='Escape'){
+        document.querySelectorAll('.modal-backdrop.is-open').forEach(closeModal);
+      }
+    });
   </script>
 
 </body>
